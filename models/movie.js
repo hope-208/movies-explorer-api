@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { REGEX_URL } = require('../utils/constants');
+const { REGEX_URL, MESSAGE_FORMAT_URL_ERROR } = require('../utils/constants');
 
 mongoose.set('runValidators', true);
 
@@ -30,7 +30,7 @@ const movieSchema = new mongoose.Schema(
       required: true,
       validate: {
         validator: (v) => REGEX_URL.test(v),
-        message: 'Неправильный формат URL.',
+        message: MESSAGE_FORMAT_URL_ERROR,
       },
     },
     trailerLink: {
@@ -38,7 +38,7 @@ const movieSchema = new mongoose.Schema(
       required: true,
       validate: {
         validator: (v) => REGEX_URL.test(v),
-        message: 'Неправильный формат URL.',
+        message: MESSAGE_FORMAT_URL_ERROR,
       },
     },
     thumbnail: {
@@ -46,7 +46,7 @@ const movieSchema = new mongoose.Schema(
       required: true,
       validate: {
         validator: (v) => REGEX_URL.test(v),
-        message: 'Неправильный формат URL.',
+        message: MESSAGE_FORMAT_URL_ERROR,
       },
     },
     owner: {

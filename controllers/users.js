@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const NotFoundError = require('../errors/NotFoundError');
 const ValidationError = require('../errors/ValidationError');
+const { MESSAGE_NOT_FOUND_ERROR_UPDATE_PROFILE } = require('../utils/constants');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
@@ -51,7 +52,7 @@ module.exports.updateUser = (req, res, next) => {
   return User.findByIdAndUpdate(id, { email, name }, { new: true, runValidators: true })
     .then((user) => {
       if (user) { return res.send({ data: user }); }
-      return next(new NotFoundError('При обновлении профиля произошла ошибка.'));
+      return next(new NotFoundError(MESSAGE_NOT_FOUND_ERROR_UPDATE_PROFILE));
     })
     .catch((err) => {
       ValidationError(err, next);

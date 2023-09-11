@@ -2,6 +2,7 @@ const Movie = require('../models/movie');
 const NotFoundError = require('../errors/NotFoundError');
 const ForbiddenError = require('../errors/ForbiddenError');
 const ValidationError = require('../errors/ValidationError');
+const { MESSAGE_NOT_FOUND_ERROR_MOVIE_ID, MESSAGE_FORBIDDEN_ERROR_MOVIE } = require('../utils/constants');
 
 module.exports.getCurrentUserMoviesAll = (req, res, next) => {
   Movie.find({ owner: req.user._id })
@@ -48,23 +49,20 @@ module.exports.createMovie = (req, res, next) => {
     });
 };
 
-module.exports.deleteMovie = (req, res, next) => {
+module.exports.deleteMovie = async (req, res, next) => {
   const id = req.params.movieId;
   const myId = req.user._id;
+  try {
+    const movie = await Movie.findByID(id);
+    if (!movie) throw new NotFoundError(MESSAGE_NOT_FOUND_ERROR_MOVIE_ID);
 
-  return Movie.findById(id)
-    .then((movie) => {
-      if (!movie) {
-        return next(new NotFoundError(`Фильм по указанному id ${id} не найден.`));
-      }
-      if (movie.owner.toString() !== myId) {
-        return next(new ForbiddenError('Фильм создан другим пользователем. У вас нет прав на его удаление.'));
-      }
-      return movie.deleteOne()
-        .then(() => res.send({ data: movie }))
-        .catch(next);
-    })
-    .catch((err) => {
-      ValidationError(err, next);
-    });
+    if (movie.owner.toString() !== myId) {
+      throw new ForbiddenError(MESSAGE_FORBIDDEN_ERROR_MOVIE);
+    }
+
+    await movie.deleteOne();
+    return res.send({ data: movie });
+  } catch (error) {
+    return next(error);
+  }
 };

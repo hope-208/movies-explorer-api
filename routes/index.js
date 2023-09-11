@@ -6,9 +6,9 @@ const app = express();
 
 const bodyParser = require('body-parser');
 
-const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const cors = require('cors');
+const rateLimit = require('../ratelimit');
 
 const {
   requestLogger,
@@ -16,30 +16,23 @@ const {
 
 const NotFoundError = require('../errors/NotFoundError');
 
+const { MESSAGE_NOT_FOUND_ERROR_PAGE } = require('../utils/constants');
+
+const { CORS_ALLOWED } = process.env;
+
 app.use(express.json());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors({
-  origin: [
-    'https://mesto.hope-208.nomoreparties.co',
-    'http://mesto.hope-208.nomoreparties.co',
-    'https://api.mesto.hope-208.nomoreparties.co',
-    'http://api.mesto.hope-208.nomoreparties.co',
-    'http://localhost:3000',
-    'http://localhost:4000',
-  ],
+  origin: CORS_ALLOWED,
   credentials: true,
 }));
 
 app.use(helmet());
 
-app.use(rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  message: 'Превышено количество запросов на сервер. Пожалуйста, попробуйте позднее.',
-}));
+app.use(rateLimit);
 
 app.use(requestLogger);
 
@@ -47,7 +40,7 @@ app.use('/', require('./users'));
 app.use('/', require('./movies'));
 
 app.use('*', (req, res, next) => {
-  next(new NotFoundError('Страница по указанному маршруту не найдена.'));
+  next(new NotFoundError(MESSAGE_NOT_FOUND_ERROR_PAGE));
 });
 
 module.exports = app;
