@@ -1,10 +1,12 @@
 const { CODE_CENTRALIZED_ERROR, MESSAGE_CENTRALIZED_ERROR } = require('../utils/constants');
 
 const CentralizedError = (err, req, res, next) => {
-  const { statusCode = CODE_CENTRALIZED_ERROR, message } = err;
+  const statusCode = err.statusCode || CODE_CENTRALIZED_ERROR;
+  const messageError = statusCode === CODE_CENTRALIZED_ERROR
+    ? MESSAGE_CENTRALIZED_ERROR
+    : err.message;
   res.status(statusCode).send({
-    message: statusCode === CODE_CENTRALIZED_ERROR
-      ? MESSAGE_CENTRALIZED_ERROR : message,
+    message: messageError,
   });
   return next();
 };
