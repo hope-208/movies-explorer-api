@@ -6,7 +6,7 @@ const CentralizedError = (err, req, res, next) => {
     message: statusCode === CODE_CENTRALIZED_ERROR
       ? MESSAGE_CENTRALIZED_ERROR : message,
   });
-  next();
+  return next();
 };
 
 module.exports = { CentralizedError };

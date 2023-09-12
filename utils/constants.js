@@ -26,6 +26,25 @@ const MESSAGE_CENTRALIZED_ERROR = 'На сервере произошла оши
 const MESSAGE_FORMAT_URL_ERROR = 'Неправильный формат URL.';
 const MESSAGE_FORMAT_EMAIL_ERROR = 'Неправильный формат почты.';
 
+const MESSAGE_VALID_ERROR_MOVIE_COUNTRY = 'Не указана страна происхождения.';
+const MESSAGE_VALID_ERROR_MOVIE_DIRECTOR = 'Не указан режиссёр.';
+const MESSAGE_VALID_ERROR_MOVIE_DURATION = 'Не указана продолжительность.';
+const MESSAGE_VALID_ERROR_MOVIE_YEAR = 'Не указан год выпуска.';
+const MESSAGE_VALID_ERROR_MOVIE_DESCRIPTION = 'Не указано описание.';
+const MESSAGE_VALID_ERROR_MOVIE_IMAGE = 'Не указана ссылка на постер(обложку).';
+const MESSAGE_VALID_ERROR_MOVIE_TRAILER_LINK = 'Не указана ссылка на трейлер.';
+const MESSAGE_VALID_ERROR_MOVIE_THUMBNAIL = 'Не указана ссылка на мини-постер(обложку/иконку).';
+const MESSAGE_VALID_ERROR_MOVIE_OWNER = 'Не указан пользователь, сохранивший(создавший) фильм.';
+const MESSAGE_VALID_ERROR_MOVIE_MOVIE_ID = 'Не указан ID фильма.';
+const MESSAGE_VALID_ERROR_MOVIE_NAME_RU = 'Не указано название фильма на русском языке.';
+const MESSAGE_VALID_ERROR_MOVIE_NAME_EN = 'Не указано название фильма на английском языке.';
+
+const MESSAGE_VALID_ERROR_USER_EMAIL = 'Заполните поле "E-mail".';
+const MESSAGE_VALID_ERROR_USER_NAME = 'Заполните поле "Имя".';
+const MESSAGE_VALID_ERROR_USER_NAME_MINLENGTH = 'Минимальная длина поля "Имя": 2 символа.';
+const MESSAGE_VALID_ERROR_USER_NAME_MAXLENGTH = 'Максимальная длина поля "Имя": 30 символов.';
+const MESSAGE_VALID_ERROR_USER_PASSWORD = 'Заполните поле "Пароль".';
+
 module.exports = {
   REGEX_URL,
   CODE_BAD_REQUEST_ERROR,
@@ -46,4 +65,21 @@ module.exports = {
   MESSAGE_CENTRALIZED_ERROR,
   MESSAGE_FORMAT_URL_ERROR,
   MESSAGE_FORMAT_EMAIL_ERROR,
+  MESSAGE_VALID_ERROR_MOVIE_COUNTRY,
+  MESSAGE_VALID_ERROR_MOVIE_DIRECTOR,
+  MESSAGE_VALID_ERROR_MOVIE_DURATION,
+  MESSAGE_VALID_ERROR_MOVIE_YEAR,
+  MESSAGE_VALID_ERROR_MOVIE_DESCRIPTION,
+  MESSAGE_VALID_ERROR_MOVIE_IMAGE,
+  MESSAGE_VALID_ERROR_MOVIE_TRAILER_LINK,
+  MESSAGE_VALID_ERROR_MOVIE_THUMBNAIL,
+  MESSAGE_VALID_ERROR_MOVIE_OWNER,
+  MESSAGE_VALID_ERROR_MOVIE_MOVIE_ID,
+  MESSAGE_VALID_ERROR_MOVIE_NAME_RU,
+  MESSAGE_VALID_ERROR_MOVIE_NAME_EN,
+  MESSAGE_VALID_ERROR_USER_EMAIL,
+  MESSAGE_VALID_ERROR_USER_NAME,
+  MESSAGE_VALID_ERROR_USER_NAME_MINLENGTH,
+  MESSAGE_VALID_ERROR_USER_NAME_MAXLENGTH,
+  MESSAGE_VALID_ERROR_USER_PASSWORD,
 };
