@@ -5,11 +5,10 @@ const CentralizedError = (err, req, res, next) => {
   const messageError = statusCode === CODE_CENTRALIZED_ERROR
     ? MESSAGE_CENTRALIZED_ERROR
     : err.message;
-
-  return () => {
-    res.status(statusCode).send({ message: messageError });
-    next();
-  };
+  res.status(statusCode).send({
+    message: messageError,
+  });
+  return next(err);
 };
 
 module.exports = { CentralizedError };
