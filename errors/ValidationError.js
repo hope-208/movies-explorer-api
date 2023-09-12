@@ -16,7 +16,7 @@ const ValidationError = (err, next) => {
     return next(new BadRequestError(MESSAGE_BAD_REQUEST_ERROR_UNCORRENT_ID));
   } if (err.code === 11000) {
     return next(new ConflictError(MESSAGE_CONFLICT_ERROR_DUPLICATE_EMAIL));
-  } return next(new CentralizedError());
+  } return next(new CentralizedError(err));
 };
 
 module.exports = ValidationError;

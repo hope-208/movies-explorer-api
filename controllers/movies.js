@@ -62,7 +62,7 @@ module.exports.deleteMovie = async (req, res, next) => {
 
     await movie.deleteOne();
     return res.send({ data: movie });
-  } catch (error) {
-    return next(error);
+  } catch (err) {
+    return next(err);
   }
 };
